@@ -12,4 +12,4 @@ WPF MVVM Employee CRUD App
 
 -Unit test for MVC project
 
--You should click navigatiom bar for using app :)
+-You should click navigation bar for using app :)
