@@ -8,11 +8,15 @@
     ".NETCoreApp,Version=v3.1": {
       "Employee.Wpf/1.0.0": {
         "dependencies": {
-          "APIWrapper": "1.0.0",
-          "Employee.API": "1.0.0"
+          "APIWrapper": "1.0.0"
         },
         "runtime": {
           "Employee.Wpf.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi/5.2.9": {
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.WebHost": "5.2.9"
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.9": {
@@ -38,38 +42,85 @@
           }
         }
       },
+      "Microsoft.AspNet.WebApi.WebHost/5.2.9": {
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Core": "5.2.9"
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.WebHost.dll": {
+            "assemblyVersion": "5.2.9.0",
+            "fileVersion": "5.2.61129.10"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "2.2.0",
           "System.Text.Encodings.Web": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          }
         }
       },
       "Microsoft.AspNetCore.Http.Features/2.2.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          }
         }
       },
       "Microsoft.AspNetCore.Mvc.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Routing.Abstractions": "2.2.0",
           "Microsoft.Net.Http.Headers": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
         }
       },
       "Microsoft.AspNetCore.Routing.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Routing.Abstractions.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          }
         }
       },
       "Microsoft.Extensions.Primitives/2.2.0": {
         "dependencies": {
           "System.Memory": "4.5.1",
           "System.Runtime.CompilerServices.Unsafe": "4.5.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18315"
+          }
         }
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "2.2.0",
           "System.Buffers": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -755,21 +806,12 @@
       },
       "APIWrapper/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNet.WebApi.Core": "5.2.9",
+          "Microsoft.AspNet.WebApi": "5.2.9",
           "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "APIWrapper.dll": {}
-        }
-      },
-      "Employee.API/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.Core": "5.2.9",
-          "Newtonsoft.Json": "13.0.1"
-        },
-        "runtime": {
-          "Employee.API.dll": {}
         }
       }
     }
@@ -779,6 +821,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.AspNet.WebApi/5.2.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jVd73J1CWj1iRf72WWnn6vkLH63QbyAJT/M16UfmF6uEsS6bK2mJz3gfFg66Au4p8uA7FgaZiWkh5wqRGNXMjQ==",
+      "path": "microsoft.aspnet.webapi/5.2.9",
+      "hashPath": "microsoft.aspnet.webapi.5.2.9.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.9": {
       "type": "package",
@@ -793,6 +842,13 @@
       "sha512": "sha512-9C0/gBUeMBjorRFSmR5Z2j5wznf9BP5SddN+OZE7X0BpXgivBZTZ42d0h8tIjJzSLHYVCU4HZBf51+cidCY4fQ==",
       "path": "microsoft.aspnet.webapi.core/5.2.9",
       "hashPath": "microsoft.aspnet.webapi.core.5.2.9.nupkg.sha512"
+    },
+    "Microsoft.AspNet.WebApi.WebHost/5.2.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+mQWEe0/mWdEccKszPI7QOLduYH0ZSl1AjdRXLlM6jKrhS3LnLMBg2WuLEIlQcCS7GCs4GU5LlhycArgg3j84g==",
+      "path": "microsoft.aspnet.webapi.webhost/5.2.9",
+      "hashPath": "microsoft.aspnet.webapi.webhost.5.2.9.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
       "type": "package",
@@ -1383,11 +1439,6 @@
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
     },
     "APIWrapper/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Employee.API/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

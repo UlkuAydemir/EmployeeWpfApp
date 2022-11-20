@@ -14,7 +14,7 @@ using System.Xml.Linq;
 
 namespace Employee.Wpf.ViewModels
 {
-    public class EmployeeViewModel : BaseViewModel
+    public class EmployeeViewModel : MainViewModel
     {
         public delegate void DataChangedEventHandler();
         public event DataChangedEventHandler DataChanged;
@@ -103,23 +103,34 @@ namespace Employee.Wpf.ViewModels
             }
         }
 
-        public ICommand CreateEmployeeCommand { get; }
         public ICommand _updateEmployeeCommand { get; set; }
+        public ICommand _createEmployeeCommand { get; set; }
+
         private IEmployeeOperation _employeeOperation;
 
-        public EmployeeViewModel(IEmployeeOperation employeeOperations)
+        public EmployeeViewModel()
         {
-            CreateEmployeeCommand = new CreateEmployeeCommand(this, employeeOperations);
-            _employeeOperation = employeeOperations;
+            _employeeOperation = this.EmployeeOperations;
+            
         }
         public ICommand UpdateEmployeeCommand
         {
             get
             {
                 if (_updateEmployeeCommand == null)
-                    _updateEmployeeCommand = new RelayCommand(param => UpdateEmployee((EmployeeViewModel)param), null);
+                    _updateEmployeeCommand = new AsyncCommandBase(param => UpdateEmployee((EmployeeViewModel)param), null);
 
                 return _updateEmployeeCommand;
+            }
+        }
+        public ICommand CreateEmployeeCommand
+        {
+            get
+            {
+                if (_createEmployeeCommand == null)
+                    _createEmployeeCommand = new AsyncCommandBase(param => CreateEmployee(), null);
+
+                return _createEmployeeCommand;
             }
         }
         private async void UpdateEmployee(EmployeeViewModel view)
@@ -144,10 +155,42 @@ namespace Employee.Wpf.ViewModels
                         handler();
                         MessageBox.Show("Employee Updated", "Success");
                     }
+                    else
+                    {
+                        MessageBox.Show(response.ToString(), "Error");
+                    }
                 }
                 
             }
-            
+        }
+
+        public async void CreateEmployee()
+        {
+            try
+            {
+                var response = await _employeeOperation.CreateEmployeeAsync(new APIWrapper.Models.Employee
+                {
+
+                    email = this.Email,
+                    gender = this.Gender,
+                    name = this.Name,
+                    status = "active",
+                    id = this.Id
+                });
+
+                if (response == System.Net.HttpStatusCode.OK)
+                {
+                    MessageBox.Show("Employee Created", "Success");
+                }
+                else
+                {
+                    MessageBox.Show(response.ToString(), "Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         public override void Dispose()

@@ -1,6 +1,5 @@
 ﻿using APIWrapper.Models;
 using APIWrapper.Operations;
-using Employee.API.Controllers;
 using Employee.Wpf.Commands;
 using Employee.Wpf.Views;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,7 @@ using System.Xml.Linq;
 
 namespace Employee.Wpf.ViewModels
 {
-    public class EmployeeListViewModel : BaseViewModel
+    public class EmployeeListViewModel : MainViewModel
     {
         private ObservableCollection<EmployeeViewModel> _employees;
         public ObservableCollection<EmployeeViewModel> EmployeeModels
@@ -50,6 +49,20 @@ namespace Employee.Wpf.ViewModels
             }
         }
 
+        private bool _buttonPreviousEnabled = false; 
+        public bool ButtonPreviousEnabled 
+        {
+            get
+            {
+                return _buttonPreviousEnabled;
+            }
+            set
+            {
+                _buttonPreviousEnabled = value;
+                OnPropertyChanged("ButtonPreviousEnabled");
+            }
+        }
+
         private string _searchKey;
         public string SearchKey
         {
@@ -74,6 +87,7 @@ namespace Employee.Wpf.ViewModels
             set
             {
                 _pageCount = value;
+                ButtonPreviousEnabled = _pageCount == 1 ? false : true;
                 OnPropertyChanged("PageCount");
             }
         }
@@ -85,9 +99,9 @@ namespace Employee.Wpf.ViewModels
 
         private IEmployeeOperation _employeeOperation;
 
-        public EmployeeListViewModel(EmployeeOperations employeeOperation)
+        public EmployeeListViewModel()
         {
-            _employeeOperation = employeeOperation;
+            _employeeOperation = this.EmployeeOperations;
             PageCount = 1;
             LoadDataGrid();
         }
@@ -100,7 +114,7 @@ namespace Employee.Wpf.ViewModels
             {
                 foreach (var employee in response)
                 {
-                    EmployeeModels.Add(new EmployeeViewModel(_employeeOperation)
+                    EmployeeModels.Add(new EmployeeViewModel()
                     {
                         Id = employee.id,
                         Name = employee.name,
@@ -117,7 +131,7 @@ namespace Employee.Wpf.ViewModels
             get
             {
                 if (_deleteCommand == null)
-                    _deleteCommand = new RelayCommand(param => DeleteEmployee(((EmployeeViewModel)param).Id), null);
+                    _deleteCommand = new AsyncCommandBase(param => DeleteEmployee(((EmployeeViewModel)param).Id));
 
                 return _deleteCommand;
             }
@@ -128,7 +142,7 @@ namespace Employee.Wpf.ViewModels
             get
             {
                 if (_searchCommand == null)
-                    _searchCommand = new RelayCommand(param => SearchEmployee((string)param), null);
+                    _searchCommand = new AsyncCommandBase(param => SearchEmployee((string)param));
 
                 return _searchCommand;
             }
@@ -139,7 +153,7 @@ namespace Employee.Wpf.ViewModels
             get
             {
                 if (_updateCommand == null)
-                    _updateCommand = new RelayCommand(param => UpdateView_Show(((EmployeeViewModel)param)), null);
+                    _updateCommand = new AsyncCommandBase(param => UpdateView_Show(((EmployeeViewModel)param)));
 
                 return _updateCommand;
             }
@@ -164,7 +178,7 @@ namespace Employee.Wpf.ViewModels
             get
             { 
                 if (_pagingCommand == null)
-                    _pagingCommand = new RelayCommand(param => Paging((string)param), null);
+                    _pagingCommand = new AsyncCommandBase(param => Paging((string)param));
 
                 return _pagingCommand;
             }

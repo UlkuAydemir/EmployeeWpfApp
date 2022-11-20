@@ -13,10 +13,12 @@ namespace Employee.Wpf.Commands
         public event EventHandler CanExecuteChanged;
 
         private INavigator _navigator;
+        private EmployeeViewModel _viewModel { get; set; }
 
         public UpdateCurrentViewModelCommand(INavigator navigator)
         {
             _navigator = navigator;
+            _navigator.CurrentViewModel = new EmployeeViewModel();
         }
 
         public bool CanExecute(object parameter)
@@ -32,13 +34,13 @@ namespace Employee.Wpf.Commands
                 switch (viewType)
                 {
                     case ViewType.Employee:
-                        _navigator.CurrentViewModel = new EmployeeViewModel(new EmployeeOperations());
+                        _navigator.CurrentViewModel = new EmployeeViewModel();
                         break;
                     case ViewType.ListEmployee:
-                        _navigator.CurrentViewModel = new EmployeeListViewModel(new EmployeeOperations());
+                        _navigator.CurrentViewModel = new EmployeeListViewModel();
                         break;
                     default:
-                        _navigator.CurrentViewModel = new EmployeeViewModel(new EmployeeOperations());
+                        _navigator.CurrentViewModel = new EmployeeViewModel();
                         break;
                 }
 

@@ -31,7 +31,7 @@
                         <DataGridTemplateColumn Header="Update Action">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Name="Update" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding DataContext.SelectedEmployee, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" Content="Update"/>
+                                    <Button Name="Update"  Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding DataContext.SelectedEmployee, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" Content="Update"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -49,7 +49,7 @@
         <Border BorderThickness="10" BorderBrush="LightGray" Grid.Row="2">
             <Grid Background="LightGray">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="LightGray">
-                    <Button Content="Previous" Padding="10" Command="{Binding PagingCommand}" CommandParameter="previous"/>
+                    <Button Content="Previous" IsEnabled="{Binding ButtonPreviousEnabled}" Padding="10" Command="{Binding PagingCommand}" CommandParameter="previous"/>
                     <Border BorderThickness="2" BorderBrush="White">
                         <TextBlock Text="{Binding PageCount}" Padding="10"/>
                     </Border>

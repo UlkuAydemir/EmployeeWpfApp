@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APIWrapper\APIWrapper.csproj" />
-    <ProjectReference Include="..\Employee.API\Employee.API.csproj" />
   </ItemGroup>
 
 </Project>

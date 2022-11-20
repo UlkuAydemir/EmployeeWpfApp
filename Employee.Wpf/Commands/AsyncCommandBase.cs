@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Employee.Wpf.Commands
 {
-    public abstract class AsyncCommandBase : ICommand
+    public class AsyncCommandBase : ICommand
     {
         private bool _isExecuting;
         public bool IsExecuting
@@ -21,6 +21,24 @@ namespace Employee.Wpf.Commands
                 OnCanExecuteChanged();
             }
         }
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;
+
+        public AsyncCommandBase()
+        {
+        }
+        public AsyncCommandBase(Action<object> execute)
+            : this(execute, null)
+        {
+        }
+
+        public AsyncCommandBase(Action<object> execute, Predicate<object> canExecute)
+        {
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+            _execute = execute;
+            _canExecute = canExecute;
+        }
 
         public event EventHandler CanExecuteChanged;
 
@@ -29,16 +47,21 @@ namespace Employee.Wpf.Commands
             return !IsExecuting;
         }
 
-        public async void Execute(object parameter)
+        public void Execute(object parameter)
         {
-            IsExecuting = true;
-
-            await ExecuteAsync(parameter);
-
-            IsExecuting = false;
+            _execute(parameter);
         }
 
-        public abstract Task ExecuteAsync(object parameter);
+        //public async void Execute(object parameter)
+        //{
+        //    IsExecuting = true;
+
+        //    await ExecuteAsync(parameter);
+
+        //    IsExecuting = false;
+        //}
+
+        //public abstract Task ExecuteAsync(object parameter);
 
         protected void OnCanExecuteChanged()
         {
