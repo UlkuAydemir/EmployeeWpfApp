@@ -10,6 +10,5 @@ WPF MVVM Employee CRUD App
 
 -Using .NetCore 3.1
 
--Unit test for MVC project
+-Unit test for MVVM project
 
--You should click navigation bar for using app :)
